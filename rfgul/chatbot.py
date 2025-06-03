@@ -7,12 +7,18 @@ import random
 # Portfolio data
 portfolio_data = {
     "name": "Muhammad Fahad",
-    "title": "Frontend Developer | Advancing in MERN Stack",
-    "education": "B.Sc. Computer Science\nIslamia University Bahawalpur",
+    "title": "Full Stack Web Developer\nFrontend Developer\nMERN Stack Developer\nDjango Developer",
+    "education": "B.Sc. Computer Science\nIslamia University Bahawalpur\n FSc Pre-Engineering\nMilitary College Sui",
     "experience": "1 Year\nFrontend Development",
     "projects": "30+ Practice Projects",
-    "learning": "Backend Development (Beginner)",
+    "learning": "DSA and Algorithms\nData Structures and Algorithms in Python",
     "skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind", "Git", "Responsive Design"],
+    "social_links": {
+        "LinkedIn": "https://www.linkedin.com/in/muhammad-fahad-7b0a1b1b6/",
+        "GitHub": "https://www.github.com/dev-rfgul",
+        "Twitter": "https://www.twitter.com/dev_rfgul",
+        "portfolio": "https://www.rfgul.live",
+        },
     "testimonials": [
         {
             "name": "Hassan Raza",
@@ -33,13 +39,14 @@ portfolio_data = {
 
 # Pattern-response pairs
 pairs = [
-    [r"(.*)(your name|who are you)(.*)", [f"My name is {portfolio_data['name']}"]],
+    [r"(.*)(your name|who are you|name)(.*)", [f"My name is {portfolio_data['name']}"]],
     [r"(.*)(title|position|role)(.*)", [f"I am a {portfolio_data['title']}"]],
     [r"(.*)(education|study|university|degree)(.*)", [f"My education:\n{portfolio_data['education']}"]],
     [r"(.*)(experience|work|job)(.*)", [f"My experience:\n{portfolio_data['experience']}"]],
     [r"(.*)(project)(.*)", [f"I have worked on {portfolio_data['projects']}"]],
     [r"(.*)(learning|currently learning|studying)(.*)", [f"I am currently learning {portfolio_data['learning']}"]],
     [r"(.*)(skill|technologies|tools)(.*)", [f"My skills include: {', '.join(portfolio_data['skills'])}"]],
+    [r"(.*)(social_links|links|social)(.*)", [f"My skills include: {', '.join(portfolio_data['social_links'].values())}"]],
     [r"(.*)(testimonial|feedback|review)(.*)", [
         "\n\n".join(
             f"{t['name']} ({t['position']}):\n\"{t['testimonial']}\"" for t in portfolio_data['testimonials']
