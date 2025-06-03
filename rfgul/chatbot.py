@@ -11,8 +11,9 @@ portfolio_data = {
     "education": "B.Sc. Computer Science\nIslamia University Bahawalpur\n FSc Pre-Engineering\nMilitary College Sui",
     "experience": "1 Year\nFrontend Development",
     "projects": "30+ Practice Projects",
-    "learning": "DSA and Algorithms\nData Structures and Algorithms in Python",
+    "learning": "Django, Python, Machine Learning",
     "skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind", "Git", "Responsive Design"],
+    "hobby": ["painitng", "calligraphy", "reading books", "writing diary", "talking to my friends", "keeping secrets", "writing false philosphy","introspecting myself","reading human beings","reading body laguage"],
     "social_links": {
         "LinkedIn": "https://www.linkedin.com/in/muhammad-fahad-7b0a1b1b6/",
         "GitHub": "https://www.github.com/dev-rfgul",
@@ -46,7 +47,9 @@ pairs = [
     [r"(.*)(project)(.*)", [f"I have worked on {portfolio_data['projects']}"]],
     [r"(.*)(learning|currently learning|studying)(.*)", [f"I am currently learning {portfolio_data['learning']}"]],
     [r"(.*)(skill|technologies|tools)(.*)", [f"My skills include: {', '.join(portfolio_data['skills'])}"]],
+    [r"(.*)(hobbies|hobby)(.*)", [f"My skills include: {', '.join(portfolio_data['hobby'])}"]],
     [r"(.*)(social_links|links|social)(.*)", [f"My skills include: {', '.join(portfolio_data['social_links'].values())}"]],
+    
     [r"(.*)(testimonial|feedback|review)(.*)", [
         "\n\n".join(
             f"{t['name']} ({t['position']}):\n\"{t['testimonial']}\"" for t in portfolio_data['testimonials']
