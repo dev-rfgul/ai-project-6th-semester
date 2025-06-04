@@ -90,14 +90,24 @@ def get_response(user_input):
 # Main window
 root = tk.Tk()
 root.title("RFGUL Portfolio Chatbot")
-root.geometry("450x500")
+root.geometry("500x600")
 root.resizable(False, False)
 
-chat_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, state='disabled', font=("Arial", 12), bg="#f9f9f9")
+# Chat area
+chat_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, state='disabled', font=("Arial", 12), bg="#f9f9f9", height=20)
 chat_area.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-user_input = tk.Text(root, height=2, font=("Arial", 12))
-user_input.pack(padx=10, pady=(0, 10), side=tk.LEFT, fill=tk.X, expand=True)
+# Input frame to properly organize input area and buttons
+input_frame = tk.Frame(root)
+input_frame.pack(padx=10, pady=(0, 10), fill=tk.X)
+
+# Text input area - now properly sized
+user_input = tk.Text(input_frame, height=3, font=("Arial", 12), wrap=tk.WORD)
+user_input.pack(fill=tk.X, pady=(0, 5))
+
+# Button frame for organizing buttons horizontally
+button_frame = tk.Frame(input_frame)
+button_frame.pack(fill=tk.X)
 
 def send_message(event=None):
     message = user_input.get("1.0", tk.END).strip()
@@ -119,17 +129,32 @@ def clear_chat():
     chat_area.configure(state='disabled')
 
 # Send button
-send_btn = tk.Button(root, text="Send", width=10, command=send_message)
-send_btn.pack(pady=5)
+send_btn = tk.Button(button_frame, text="Send", width=10, command=send_message, bg="#4CAF50", fg="white", font=("Arial", 10, "bold"))
+send_btn.pack(side=tk.LEFT, padx=(0, 5))
 
-clear_button = tk.Button(root, text="Clear", command=clear_chat)
-clear_button.pack(pady=5)
+# Clear button
+clear_button = tk.Button(button_frame, text="Clear", width=10, command=clear_chat, bg="#f44336", fg="white", font=("Arial", 10, "bold"))
+clear_button.pack(side=tk.LEFT)
 
+# Instructions label
+instructions = tk.Label(input_frame, text="Type your message and press Enter or click Send", font=("Arial", 9), fg="gray")
+instructions.pack(pady=(5, 0))
+
+# Initialize chat
 chat_area.configure(state='normal')
 chat_area.insert(tk.END, "Bot: Hi there! I'm your portfolio assistant. Ask me anything about Fahad's profile.\n" + "-"*60 + "\n")
 chat_area.configure(state='disabled')
 
-user_input.bind("<Return>", send_message)
+# Bind Enter key to send message (Ctrl+Enter for new line)
+def handle_keypress(event):
+    if event.keysym == 'Return':
+        if event.state & 0x4:  # Ctrl+Enter
+            return None  # Allow normal newline
+        else:
+            send_message()
+            return "break"  # Prevent default Enter behavior
+
+user_input.bind("<KeyPress>", handle_keypress)
 user_input.focus_set()
 
 root.mainloop()
